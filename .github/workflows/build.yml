@@ -1,0 +1,27 @@
+name: Build Windows EXE
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Kodu çek
+        uses: actions/checkout@v4
+      - name: Node.js kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Bağımlılıkları yükle
+        run: npm install
+      - name: EXE build et
+        run: npm run dist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: EXE'yi yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: WPM-Testi-Windows
+          path: dist/*.exe
+          retention-days: 30
