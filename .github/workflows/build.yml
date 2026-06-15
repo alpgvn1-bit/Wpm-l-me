@@ -25,3 +25,4 @@ jobs:
           name: WPM-Testi-Windows
           path: dist/*.exe
           retention-days: 30
+          #aaaa
